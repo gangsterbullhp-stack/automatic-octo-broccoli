@@ -387,18 +387,15 @@ export default function App() {
             className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-6"
           >
             <div className="max-w-md w-full bg-neutral-900/90 border-2 border-gold-500/50 p-8 rounded-[2rem] text-center shadow-[0_0_50px_-12px_rgba(212,175,55,0.4)] backdrop-blur-md">
-              <div className="w-20 h-20 bg-gold-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                <Volume2 className="w-10 h-10 text-gold-500" />
-              </div>
               <h3 className="text-3xl font-extrabold mb-2 text-white">¡Felicitaciones! 🎉</h3>
-              <p className="text-gold-400 font-bold mb-6 text-lg">
-                Solo por hoy tienes un 50% de DESCUENTO
+              <p className="text-gold-400 font-bold mb-6 text-lg uppercase">
+                Oferta por Tiempo Limitado
               </p>
               
               <div className="bg-black/40 rounded-2xl p-6 mb-8 border border-white/5">
-                <p className="text-neutral-400 text-sm mb-2 uppercase tracking-widest font-semibold">Oferta Irresistible</p>
+                <p className="text-neutral-400 text-sm mb-2 uppercase tracking-widest font-semibold">Oferta por Tiempo Limitado</p>
                 <div className="flex flex-col items-center justify-center gap-2">
-                  <p className="text-neutral-500 line-through text-xl">Precio Anterior: $97.00</p>
+                  <p className="text-red-500 line-through text-xl font-bold">Precio Anterior: $97.00</p>
                   <p className="text-5xl font-black text-white">
                     $3.99 <span className="text-xl text-gold-500">USD</span>
                   </p>
@@ -454,7 +451,7 @@ export default function App() {
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
               <div className="text-left">
-                <p className="text-neutral-500 line-through text-lg">Valor Original: $10,000+</p>
+                <p className="text-red-500 line-through text-lg font-bold">Precio Anterior: $97.00</p>
                 <p className="text-3xl font-bold text-gold-400">Hoy: $3.99 USD</p>
               </div>
               <CTAButton className="w-full md:w-auto">

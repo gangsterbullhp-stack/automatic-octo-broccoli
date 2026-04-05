@@ -1,0 +1,27 @@
+{
+  "entities": {
+    "AppConfig": {
+      "title": "Configuración de la Aplicación",
+      "description": "Almacena configuraciones globales como la imagen principal.",
+      "type": "object",
+      "properties": {
+        "heroImageUrl": {
+          "type": "string",
+          "description": "URL de la imagen principal de la biblioteca."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha de última actualización."
+        }
+      },
+      "required": ["heroImageUrl"]
+    }
+  },
+  "firestore": {
+    "config/main": {
+      "schema": "AppConfig",
+      "description": "Documento único de configuración principal."
+    }
+  }
+}

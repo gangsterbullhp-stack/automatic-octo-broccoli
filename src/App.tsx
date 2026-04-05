@@ -393,7 +393,6 @@ export default function App() {
               </p>
               
               <div className="bg-black/40 rounded-2xl p-6 mb-8 border border-white/5">
-                <p className="text-neutral-400 text-sm mb-2 uppercase tracking-widest font-semibold">Oferta por Tiempo Limitado</p>
                 <div className="flex flex-col items-center justify-center gap-2">
                   <p className="text-red-500 line-through text-xl font-bold">Precio Anterior: $97.00</p>
                   <p className="text-5xl font-black text-white">
@@ -408,7 +407,6 @@ export default function App() {
               >
                 LO QUIERO AHORA <ArrowRight className="w-6 h-6" />
               </button>
-              <p className="text-neutral-500 text-xs mt-4">Al hacer clic se activará el audio de bienvenida</p>
             </div>
           </motion.div>
         )}

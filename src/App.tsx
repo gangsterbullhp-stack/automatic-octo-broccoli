@@ -4,15 +4,15 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  BookOpen, 
-  Headphones, 
-  Smartphone, 
-  DollarSign, 
-  Zap, 
-  CheckCircle2, 
-  Star, 
-  ShieldCheck, 
+import {
+  BookOpen,
+  Headphones,
+  Smartphone,
+  DollarSign,
+  Zap,
+  CheckCircle2,
+  Star,
+  ShieldCheck,
   ArrowRight,
   TrendingUp,
   Brain,
@@ -50,7 +50,7 @@ const CountdownTimer = ({ compact = false }: { compact?: boolean }) => {
       setTimeLeft(prev => {
         if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
         if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        
+
         // Timer reached 0:0
         if (!hasRedirected.current && prev.minutes === 0 && prev.seconds === 0) {
           hasRedirected.current = true;
@@ -112,11 +112,10 @@ const CTAButton = ({ children, className = "", primary = true }: { children: Rea
     rel="noopener noreferrer"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
-    className={`px-8 py-4 rounded-full font-bold text-lg shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
-      primary 
-        ? "bg-gold-gradient text-neutral-950 hover:shadow-gold-500/20" 
+    className={`px-8 py-4 rounded-full font-bold text-lg shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${primary
+        ? "bg-gold-gradient text-neutral-950 hover:shadow-gold-500/20"
         : "bg-white/10 text-white border border-white/20 hover:bg-white/20"
-    } ${className}`}
+      } ${className}`}
   >
     {children}
   </motion.a>
@@ -127,14 +126,14 @@ const PromoVideo = ({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement |
     <div className="relative w-full max-w-4xl mx-auto group">
       {/* Decorative background glow */}
       <div className="absolute -inset-10 bg-gold-500/15 blur-[120px] rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-700" />
-      
+
       <div className="relative z-10 bg-neutral-900/60 rounded-[2rem] p-1 border border-white/10 shadow-[0_0_50px_-12px_rgba(212,175,55,0.3)] backdrop-blur-md overflow-hidden flex items-center justify-center transition-all duration-500 hover:shadow-[0_0_60px_-10px_rgba(212,175,55,0.4)] hover:border-gold-500/30">
-        <img 
-          src="/biblioteca.jpeg" 
+        <img
+          src="/biblioteca.jpeg"
           alt="Mega Biblioteca Digital"
           className="w-full h-auto object-cover rounded-[1.8rem] shadow-2xl transition-transform duration-700 scale-100 group-hover:scale-105"
         />
-        
+
         {/* Premium Overlay Gradient */}
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-white/5" />
       </div>
@@ -150,8 +149,8 @@ export default function App() {
   const [isAudioReady, setIsAudioReady] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [audioError, setAudioError] = useState(false);
-  const [showPlayOverlay, setShowPlayOverlay] = useState(false);
-  const [recentPurchase, setRecentPurchase] = useState<{name: string, city: string, time: string} | null>(null);
+  const [showPlayOverlay, setShowPlayOverlay] = useState(true);
+  const [recentPurchase, setRecentPurchase] = useState<{ name: string, city: string, time: string } | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const musicRef = useRef<HTMLAudioElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -171,12 +170,12 @@ export default function App() {
       "Concepción", "Trujillo", "Bilbao", "Cancún", "Cartagena", "Mendoza", "Antofagasta", "Chiclayo", "Málaga", "Tijuana",
       "Santa Cruz", "San José", "Panamá", "Santo Domingo", "San Juan", "Guayaquil", "Asunción", "Montevideo", "Caracas", "La Paz"
     ];
-    
+
     const showNextPurchase = () => {
       const name = names[Math.floor(Math.random() * names.length)];
       const city = cities[Math.floor(Math.random() * cities.length)];
       setRecentPurchase({ name, city, time: "hace 1 minuto" });
-      
+
       setTimeout(() => setRecentPurchase(null), 5000);
       setTimeout(showNextPurchase, 15000 + Math.random() * 10000);
     };
@@ -242,7 +241,7 @@ export default function App() {
   // Voiceover Playback Logic
   useEffect(() => {
     console.log("🎙️ Preparing local voiceover playback...");
-    
+
     const audio = new Audio('/ventas.wav');
     audio.loop = false; // Play only once
     audio.muted = isMuted;
@@ -254,7 +253,7 @@ export default function App() {
         console.log("🎙️ Voiceover already started, skipping...");
         return;
       }
-      
+
       console.log("🎙️ Attempting to play voiceover...");
       const playPromises = [];
       if (audioRef.current) {
@@ -310,7 +309,7 @@ export default function App() {
     if (e) e.stopPropagation();
     const newState = !isPlaying;
     setIsPlaying(newState);
-    
+
     if (audioRef.current) {
       if (newState) audioRef.current.play().catch(console.error);
       else audioRef.current.pause();
@@ -338,7 +337,7 @@ export default function App() {
     console.log("🚀 Force starting audio system...");
     setShowPlayOverlay(false); // Hide immediately for better UX
     setHasInteracted(true);
-    
+
     const playPromises = [];
     if (audioRef.current) {
       console.log("🎙️ Adding voiceover to force play");
@@ -381,26 +380,38 @@ export default function App() {
       {/* Play Overlay (if browser blocks autoplay) */}
       <AnimatePresence>
         {showPlayOverlay && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-6"
           >
-            <div className="max-w-sm w-full bg-neutral-900/80 border border-gold-500/30 p-8 rounded-[2rem] text-center shadow-2xl backdrop-blur-md">
-              <div className="w-16 h-16 bg-gold-500/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                <Volume2 className="w-8 h-8 text-gold-500" />
+            <div className="max-w-md w-full bg-neutral-900/90 border-2 border-gold-500/50 p-8 rounded-[2rem] text-center shadow-[0_0_50px_-12px_rgba(212,175,55,0.4)] backdrop-blur-md">
+              <div className="w-20 h-20 bg-gold-500/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                <Volume2 className="w-10 h-10 text-gold-500" />
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-white">¡Tomaste una excelente decisión!</h3>
-              <p className="text-neutral-400 mb-8 text-base">
-                La oferta está por acabar. Haz clic abajo para asegurar tu acceso.
+              <h3 className="text-3xl font-extrabold mb-2 text-white">¡Felicitaciones! 🎉</h3>
+              <p className="text-gold-400 font-bold mb-6 text-lg">
+                Solo por hoy tienes un 50% de DESCUENTO
               </p>
+              
+              <div className="bg-black/40 rounded-2xl p-6 mb-8 border border-white/5">
+                <p className="text-neutral-400 text-sm mb-2 uppercase tracking-widest font-semibold">Oferta Irresistible</p>
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <p className="text-neutral-500 line-through text-xl">Precio Anterior: $97.00</p>
+                  <p className="text-5xl font-black text-white">
+                    $3.99 <span className="text-xl text-gold-500">USD</span>
+                  </p>
+                </div>
+              </div>
+
               <button 
                 onClick={forceStartAudio}
-                className="w-full bg-gold-gradient text-black font-black py-4 rounded-xl shadow-[0_0_30px_-5px_rgba(212,175,55,0.5)] hover:scale-105 transition-transform text-lg uppercase tracking-wider"
+                className="w-full bg-gold-gradient text-neutral-950 font-black py-5 rounded-xl shadow-[0_0_30px_-5px_rgba(212,175,55,0.5)] hover:scale-105 transition-transform text-xl uppercase tracking-wider flex items-center justify-center gap-3"
               >
-                Quiero la Oferta
+                LO QUIERO AHORA <ArrowRight className="w-6 h-6" />
               </button>
+              <p className="text-neutral-500 text-xs mt-4">Al hacer clic se activará el audio de bienvenida</p>
             </div>
           </motion.div>
         )}
@@ -409,7 +420,7 @@ export default function App() {
       {/* Fixed Header with Timer */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-gold-500/20 py-3 px-6 shadow-2xl">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-          
+
           <div className="flex items-center gap-6">
             <div className="hidden md:flex flex-col items-end">
               <span className="text-[10px] uppercase tracking-widest text-gold-500 font-bold">Oferta Expira En:</span>
@@ -666,7 +677,7 @@ export default function App() {
           <div className="absolute inset-0 bg-gold-gradient opacity-10" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/20 blur-[120px] rounded-full" />
         </div>
-        
+
         <div className="relative z-10 text-center py-10">
           <h2 className="text-4xl md:text-7xl font-bold mb-6">Empieza a Aprender Hoy por Solo $3.99</h2>
           <p className="text-xl md:text-2xl text-neutral-400 mb-12 max-w-3xl mx-auto">
@@ -697,7 +708,7 @@ export default function App() {
 
       {/* Floating Mute/Unmute Control */}
       <div className="fixed bottom-6 right-6 z-[60]">
-        <motion.button 
+        <motion.button
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.1, opacity: 1 }}
@@ -746,7 +757,7 @@ export default function App() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <button 
+                <button
                   onClick={() => signOut(auth)}
                   className="w-full bg-red-900/40 hover:bg-red-900/60 border border-red-900/50 text-red-200 px-4 py-2 rounded-lg transition-colors"
                 >
